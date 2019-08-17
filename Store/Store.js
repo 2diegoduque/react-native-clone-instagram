@@ -4,15 +4,6 @@ import createSagaMiddleware from "redux-saga";
 import funcionPrimaria from "./Sagas/Sagas";
 import constants from "./Constants";
 
-const reducerTest = (state = [0], action) => {
-  switch (action.type) {
-    case "aumentar_reducer_test":
-      return [...state, 1];
-    default:
-      return state;
-  }
-};
-
 const reducerSession = (state = null, action) => {
   switch (action.type) {
     case constants.defineSession:
@@ -24,9 +15,20 @@ const reducerSession = (state = null, action) => {
   }
 };
 
+const reducerImageRegister = (state = { image: null }, action) => {
+  switch (action.type) {
+    case constants.uploadImageRegister:
+      return { image: action.image };
+    case constants.clearImageRegister:
+      return { image: null };
+    default:
+      return state;
+  }
+};
+
 const sagaMiddleware = createSagaMiddleware();
 
-const reducers = combineReducers({ reducerSession, reducerTest, form });
+const reducers = combineReducers({ reducerSession, reducerImageRegister, form });
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(funcionPrimaria);
 export default store;

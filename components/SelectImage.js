@@ -1,21 +1,16 @@
 import * as React from "react";
-import { StyleSheet, Button, Image, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, View, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { Constants, Permissions } from "react-native-unimodules";
 
-export default class SelectImage extends React.Component {
-  state = {
-    image: null
-  };
-
+class SelectImage extends React.Component {
   render() {
-    let { image } = this.state;
-
+    let { image } = this.props;
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this._pickImage}>
           {image ? (
-            <Image style={styles.imageProfile} source={{ uri: image }} />
+            <Image style={styles.imageProfile} source={{ uri: image.uri }} />
           ) : (
             <Image style={styles.imageProfile} source={require("../assets/default-picture.png")} />
           )}
@@ -44,10 +39,8 @@ export default class SelectImage extends React.Component {
       aspect: [4, 4]
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.props.uploadImage(result);
     }
   };
 }
@@ -65,3 +58,5 @@ const styles = StyleSheet.create({
     borderRadius: 50
   }
 });
+
+export default SelectImage;

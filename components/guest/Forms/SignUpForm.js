@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { Field, reduxForm } from "redux-form";
 
@@ -22,7 +22,19 @@ const fieldTextInput = props => {
   );
 };
 
-const validate = values => {
+const fieldImage = props => {
+  return (
+    <View>
+      <View>
+        {props.meta.touched && props.meta.error && (
+          <Text style={styles.textError}>{props.meta.error}</Text>
+        )}
+      </View>
+    </View>
+  );
+};
+
+const validate = (values, props) => {
   const errors = {};
   if (!values.name) {
     errors.name = "Nombre requerido";
@@ -52,12 +64,17 @@ const validate = values => {
     errors.confirmPassword = "La contraseña debe coincidir";
   }
 
+  if (!props.image) {
+    errors.image = "Imagen requerida";
+  }
+
   return errors;
 };
 
 const SignUpForm = props => {
   return (
     <View style={styles.container}>
+      <Field name="image" component={fieldImage} />
       <Field
         name="name"
         component={fieldTextInput}

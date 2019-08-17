@@ -26,3 +26,16 @@ export const actionCloseSession = () => {
     type: constants.closeSession
   };
 };
+
+export const actionUploadImageRegister = image => {
+  return {
+    type: constants.uploadImageRegister,
+    image
+  };
+};
+
+export const actionClearImage = () => {
+  return {
+    type: constants.clearImageRegister
+  };
+};
