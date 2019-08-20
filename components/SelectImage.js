@@ -4,10 +4,9 @@ import * as ImagePicker from "expo-image-picker";
 import { Constants, Permissions } from "react-native-unimodules";
 
 class SelectImage extends React.Component {
-  render() {
-    let { image } = this.props;
-    return (
-      <View style={styles.container}>
+  renderImageDefault(image, origin) {
+    if (!origin) {
+      return (
         <TouchableOpacity onPress={this._pickImage}>
           {image ? (
             <Image style={styles.imageProfile} source={{ uri: image.uri }} />
@@ -15,12 +14,29 @@ class SelectImage extends React.Component {
             <Image style={styles.imageProfile} source={require("../assets/default-picture.png")} />
           )}
         </TouchableOpacity>
-      </View>
-    );
+      );
+    } else {
+      return (
+        <TouchableOpacity onPress={this._pickImage}>
+          {image ? (
+            <Image style={styles.imagePoster} source={{ uri: image.uri }} />
+          ) : (
+            <Image style={styles.imagePoster} source={require("../assets/default_poster.gif")} />
+          )}
+        </TouchableOpacity>
+      );
+    }
+  }
+  render() {
+    let { image, origin } = this.props;
+    return <View style={styles.container}>{this.renderImageDefault(image, origin)}</View>;
   }
 
   componentDidMount() {
     this.getPermissionAsync();
+    if (this.props.origin && this.props.origin == "openGallery") {
+      // this._pickImage();
+    }
   }
 
   getPermissionAsync = async () => {
@@ -56,6 +72,11 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: "cover",
     borderRadius: 50
+  },
+  imagePoster: {
+    width: 500,
+    height: 300,
+    resizeMode: "cover"
   }
 });
 

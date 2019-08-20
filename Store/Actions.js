@@ -39,3 +39,29 @@ export const actionClearImage = () => {
     type: constants.clearImageRegister
   };
 };
+
+export const actionUploadImagePoster = image => {
+  return {
+    type: constants.uploadImagePoster,
+    image
+  };
+};
+
+export const actionClearImagePoster = () => {
+  return {
+    type: constants.clearImagePoster
+  };
+};
+
+export const actionUploadPoster = values => {
+  return {
+    type: constants.uploadPoster,
+    values
+  };
+};
+
+export const actionLoadPosters = () => {
+  return {
+    type: constants.loadPosters
+  };
+};

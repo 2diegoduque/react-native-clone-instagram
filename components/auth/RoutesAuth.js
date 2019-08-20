@@ -14,6 +14,7 @@ import Poster from "./Poster.js";
 import Comments from "./Comments.js";
 
 import FollowTab from "./FollowTab";
+import AddTab from "./AddTab";
 
 const homeScreenStack = createStackNavigator({
   Home: {
@@ -80,12 +81,18 @@ const searchScreenStack = createStackNavigator({
 });
 
 const addScreenStack = createStackNavigator({
-  Add: {
-    screen: Add,
-    navigationOptions: ({ navigation }) => ({
-      title: "Add"
-    })
+  AddTab: {
+    screen: AddTab,
+    navigationOptions: {
+      header: null
+    }
   }
+  // Add: {
+  //   screen: Add,
+  //   navigationOptions: ({ navigation }) => ({
+  //     title: "Add"
+  //   })
+  // }
 });
 
 const followScreenStack = createStackNavigator({

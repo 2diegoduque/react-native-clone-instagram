@@ -26,9 +26,25 @@ const reducerImageRegister = (state = { image: null }, action) => {
   }
 };
 
+const reducerImagePoster = (state = { image: null }, action) => {
+  switch (action.type) {
+    case constants.uploadImagePoster:
+      return { image: action.image };
+    case constants.clearImagePoster:
+      return { image: null };
+    default:
+      return state;
+  }
+};
+
 const sagaMiddleware = createSagaMiddleware();
 
-const reducers = combineReducers({ reducerSession, reducerImageRegister, form });
+const reducers = combineReducers({
+  reducerSession,
+  reducerImageRegister,
+  reducerImagePoster,
+  form
+});
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(funcionPrimaria);
 export default store;

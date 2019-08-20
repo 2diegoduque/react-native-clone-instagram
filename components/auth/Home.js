@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import { connect } from "react-redux";
+import { actionLoadPosters } from "../../Store/Actions";
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
+class Home extends Component {
+  componentDidMount() {
+    this.props.loadPoster();
   }
 
   render() {
@@ -27,3 +27,20 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadPoster: () => {
+      dispatch(actionLoadPosters());
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

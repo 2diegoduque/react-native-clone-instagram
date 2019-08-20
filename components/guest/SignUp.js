@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Button } from "react-native";
 import { connect } from "react-redux";
-import { blur, change } from "redux-form";
+import { blur } from "redux-form";
 import SignUpForm from "./Forms/SignUpForm";
 import { actionRegister, actionUploadImageRegister, actionClearImage } from "../../Store/Actions";
 import SelectImage from "../SelectImage";
