@@ -65,3 +65,10 @@ export const actionLoadPosters = () => {
     type: constants.loadPosters
   };
 };
+
+export const actionAddPostersStoreHome = listPosts => {
+  return {
+    type: constants.addPostersStoreHome,
+    listPosts
+  };
+};

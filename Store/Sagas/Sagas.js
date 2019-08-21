@@ -1,7 +1,8 @@
-import { takeEvery, call, select } from "redux-saga/effects";
+import { takeEvery, call, select, put } from "redux-saga/effects";
 import { autentication } from "../Services/Firebase";
 import { database } from "../Services/Firebase";
 import constants from "../Constants";
+import { actionAddPostersStoreHome } from "../Actions";
 
 const registerUserFirebase = values =>
   autentication
@@ -91,19 +92,24 @@ function* generatorUploadPoster({ values }) {
 
 const loadPosters = () =>
   database
-    .ref("poster")
+    .ref("poster/")
     .once("value")
-    .then(result => {
-      result.forEach(item => {
-        console.log(item);
-        return null;
+    .then(snapshot => {
+      let index = 0;
+      let posters = [];
+      snapshot.forEach(childSnapshot => {
+        let poster = childSnapshot.val();
+        poster.key = String(index + 1);
+        posters.push(poster);
+        index++;
       });
+      return posters;
     });
 
 function* generatorLoadPosters() {
   try {
     const listPosts = yield call(loadPosters);
-    console.log("listPosts: ", listPosts);
+    yield put(actionAddPostersStoreHome(listPosts));
   } catch (error) {
     console.log("generatorLoadPosters error: ", error);
   }

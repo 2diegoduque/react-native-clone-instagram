@@ -11,7 +11,8 @@ const constants = {
   uploadImagePoster: "upload_image_poster",
   clearImagePoster: "upload_image_poster",
   uploadPoster: "upload_poster",
-  loadPosters: "load_posters"
+  loadPosters: "load_posters",
+  addPostersStoreHome: "add_posters_store_home"
 };
 
 export default constants;

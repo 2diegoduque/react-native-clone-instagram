@@ -37,12 +37,22 @@ const reducerImagePoster = (state = { image: null }, action) => {
   }
 };
 
+const reducerPostersHome = (state = [], action) => {
+  switch (action.type) {
+    case constants.addPostersStoreHome:
+      return [...state, ...action.listPosts];
+    default:
+      return state;
+  }
+};
+
 const sagaMiddleware = createSagaMiddleware();
 
 const reducers = combineReducers({
   reducerSession,
   reducerImageRegister,
   reducerImagePoster,
+  reducerPostersHome,
   form
 });
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));

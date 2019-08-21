@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, FlatList, Image, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { actionLoadPosters } from "../../Store/Actions";
 
@@ -12,9 +12,16 @@ class Home extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.viewContainer}>
-        <Text>Home Screen</Text>
+        <FlatList
+          data={this.props.listPosts}
+          renderItem={({ item }) => {
+            const { width } = Dimensions.get("window");
+            return <Image source={{ uri: item.photoPoster }} style={{ width, height: 300, resizeMode: "cover" }} />;
+          }}
+        />
+        {/* <Text>Home Screen</Text>
         <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
-        <Button title="Comentarios" onPress={() => navigation.navigate("Comments")} />
+        <Button title="Comentarios" onPress={() => navigation.navigate("Comments")} /> */}
       </View>
     );
   }
@@ -22,14 +29,19 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    flex: 1
+  },
+  imagePoster: {
+    width: 500,
+    height: 300,
+    resizeMode: "cover"
   }
 });
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    listPosts: state.reducerPostersHome
+  };
 }
 
 function mapDispatchToProps(dispatch) {
