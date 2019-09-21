@@ -72,3 +72,10 @@ export const actionAddPostersStoreHome = listPosts => {
     listPosts
   };
 };
+
+export const actionAddAuthorsStoreHome = listAuthors => {
+  return {
+    type: constants.addAuthorsStoreHome,
+    listAuthors
+  };
+};

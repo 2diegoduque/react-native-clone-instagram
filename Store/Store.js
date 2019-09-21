@@ -46,6 +46,15 @@ const reducerPostersHome = (state = [], action) => {
   }
 };
 
+const reducerAuthorsHome = (state = [], action) => {
+  switch (action.type) {
+    case constants.addAuthorsStoreHome:
+      return [...state, ...action.listAuthors];
+    default:
+      return state;
+  }
+};
+
 const sagaMiddleware = createSagaMiddleware();
 
 const reducers = combineReducers({
@@ -53,6 +62,7 @@ const reducers = combineReducers({
   reducerImageRegister,
   reducerImagePoster,
   reducerPostersHome,
+  reducerAuthorsHome,
   form
 });
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
